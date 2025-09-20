@@ -4,8 +4,12 @@ dotfiles synced by chezmoi
 
 ## QuickStart
 
+> prerequirement: `git`, `curl`
+
 on a new machine:
 
 ```
-chezmoi init https://github.com/atomsi7/dotfiles.git
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply atomsi7 && \
+cd  ~/.local/share/chezmoi && \
+sh install.sh
 ```
