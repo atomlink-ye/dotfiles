@@ -1,6 +1,7 @@
 brew "cloc"
 brew "cmake"
 brew "curl"
+brew "delta"
 brew "docker"
 brew "fish"
 brew "gcc"
