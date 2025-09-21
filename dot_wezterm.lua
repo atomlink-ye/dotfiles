@@ -1,15 +1,20 @@
 local wezterm = require 'wezterm'
 
-local config = {}
+return {
+  -- Set initial window size (columns x rows)
+  initial_cols = 100,
+  initial_rows = 25,
 
-if wezterm.config_builder then
-  config = wezterm.config_builder()
-end
+  -- Font and size
+  font = wezterm.font('Maple Mono Normal NF CN', {weight = 'DemiBold'}),
+  font_size = 18.0,
+  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 
-config.font = wezterm.font('Maple Mono Normal NF CN', { weight = 'DemiBold' })
-config.font_size = 18
-
-config.initial_cols = 80
-config.initial_rows = 20
-
-return config
+  -- Optional: nice window padding
+  window_padding = {
+    left = 8,
+    right = 8,
+    top = 4,
+    bottom = 4,
+  },
+}
