@@ -9,7 +9,5 @@ dotfiles synced by chezmoi
 on a new machine:
 
 ```
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply atomsi7 && \
-cd  ~/.local/share/chezmoi && \
-sh install.sh
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init atomsi7 --apply
 ```

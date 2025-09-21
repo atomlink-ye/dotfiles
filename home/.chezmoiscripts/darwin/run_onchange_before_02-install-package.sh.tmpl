@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ $brews := list
+     "cloc"
+     "cmake"
+     "curl"
+     "delta"
+     "docker"
+     "fish"
+     "gcc"
+     "git"
+     "go"
+     "lazygit"
+     "libusb"
+     "python"
+     "neovim"
+     "ninja"
+     "node"
+     "pnpm"
+     "ripgrep"
+     "rust"
+     "solidity"
+     "tlrc"
+     "tmux"
+     "tree"
+     "uv"
+     "yarn" -}}
+{{ $casks := list
+     "docker-desktop"
+     "font-maple-mono-normal-nf-cn"
+     "obsidian"
+     "raycast"
+     "visual-studio-code"
+     "wezterm@nightly" -}}
+
+brew bundle --file=/dev/stdin <<EOF
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
+EOF
+

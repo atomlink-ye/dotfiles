@@ -3,7 +3,6 @@ if status is-interactive
 end
 # Homebrew & Node
 set -gx PATH /opt/homebrew/bin $PATH
-set -gx PATH /opt/homebrew/opt/node@22/bin $PATH
 
 # Homebrew update interval: 30 days
 set -gx HOMEBREW_AUTO_UPDATE_SECS (math "30 * 24 * 60 * 60")
@@ -29,3 +28,6 @@ if type -q fish_add_path
 else
     set -gx PATH $PNPM_HOME $PATH
 end
+{{ if stat "/opt/homebrew/bin/brew" -}}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{ end -}}

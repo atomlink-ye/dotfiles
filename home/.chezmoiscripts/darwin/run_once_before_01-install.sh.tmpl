@@ -1,0 +1,17 @@
+#!/bin/bash
+set -euo pipefail
+
+# shellcheck source=utils/helpers.sh
+source "${CHEZMOI_WORKING_TREE}/scripts/utils/helpers.sh"
+
+
+
+# ---------- Homebrew ----------
+log "Checking Homebrew installation…"
+
+if ! have brew; then
+  log "Installing Homebrew (non-interactive)…"
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+  log "Homebrew already installed."
+fi
