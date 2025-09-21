@@ -1,5 +1,49 @@
+{{/* boolean feature tags */}}
+{{- $ephemeral := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
+{{- $work := false -}}{{/* true if this machine is a work machine */}}
+{{- $job := "" -}}{{/* the job this machine is used for   */}}
+{{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
+{{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
+{{- "" -}}
+
+{{- $osID := .chezmoi.os -}}
+{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
+{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+{{/* work around unreliable hostname on darwin */}}
+{{- $hostname := .chezmoi.hostname -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $hostname = output "scutil" "--get" "LocalHostName" | trim -}}
+{{- end -}}
+
+
+{{- if not $ephemeral -}}
+{{-   if eq $hostname "MacBook-Air" -}}
+{{-     $personal = true -}}
+{{-   else if eq $hostname "SG01102MLs-MacBook-Pro" -}}
+{{-     $work = true -}}
+{{-     $job = "bybit" -}}
+{{-   end -}}
+{{- end -}}
+
+{{- $email := "atomlink.ye@gmail.com" -}}
+{{- if $work -}}
+{{-   $email = "fan.ye2000@outlook.com" -}}
+{{-   if eq $job "bybit" -}}
+{{-     $email = "link.ye@bybit.com" -}}
+{{-   end -}}
+{{- end -}}
+
+
 [data]
-    email = "atomlink.ye@gmail.com"
+    ephemeral = {{ $ephemeral }}
+    email = {{ $email | quote }}
+    work = {{ $work }}
+    headless = {{ $headless }}
+    hostname = {{ $hostname | quote }}
+    personal = {{ $personal }}
+    osid = {{ $osID | quote }}
 [diff]
     pager = "delta"
 [merge]
