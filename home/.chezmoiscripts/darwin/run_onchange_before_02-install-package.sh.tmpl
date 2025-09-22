@@ -6,6 +6,7 @@ set -eufo pipefail
      "cloc"
      "cmake"
      "curl"
+     "codex"
      "delta"
      "fish"
      "gcc"
@@ -25,7 +26,9 @@ set -eufo pipefail
      "tmux"
      "tree"
      "uv"
-     "yarn" -}}
+     "yarn"
+     "zoxide" -}}
+
 {{ $casks := list
      "font-maple-mono-normal-nf-cn"
      "obsidian"
@@ -35,10 +38,21 @@ set -eufo pipefail
      "1password"
      "1password-cli"
      "rectangle"
-     "orbstack" -}}
+     "orbstack"
+     "coteditor"
+     "meld"
+     "google-chrome" -}}
 
+{{ if .personal -}}
+{{   $brews = concat $brews (list
+     "tailscale") -}}
+{{   $casks = concat $casks (list
+     "tailscale-app"
+     "telegram"
+     "discord") -}}
+{{ end -}}
 
-brew bundle --file=/dev/stdin <<EOF
+brew bundle --verbose --file=/dev/stdin <<EOF
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
 {{ end -}}
