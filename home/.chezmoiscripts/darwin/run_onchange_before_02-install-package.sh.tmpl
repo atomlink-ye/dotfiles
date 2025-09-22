@@ -25,8 +25,7 @@ set -eufo pipefail
      "tmux"
      "tree"
      "uv"
-     "yarn"
-     "orbstack" -}}
+     "yarn" -}}
 {{ $casks := list
      "font-maple-mono-normal-nf-cn"
      "obsidian"
@@ -34,7 +33,10 @@ set -eufo pipefail
      "visual-studio-code"
      "wezterm@nightly"
      "1password"
-     "1password-cli" -}}
+     "1password-cli"
+     "rectangle"
+     "orbstack" -}}
+
 
 brew bundle --file=/dev/stdin <<EOF
 {{ range ($brews | sortAlpha | uniq) -}}
