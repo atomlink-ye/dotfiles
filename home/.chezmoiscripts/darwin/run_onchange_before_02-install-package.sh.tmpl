@@ -33,7 +33,9 @@ set -eufo pipefail
      "obsidian"
      "raycast"
      "visual-studio-code"
-     "wezterm@nightly" -}}
+     "wezterm@nightly"
+     "1password"
+     "1password-cli" -}}
 
 brew bundle --file=/dev/stdin <<EOF
 {{ range ($brews | sortAlpha | uniq) -}}
